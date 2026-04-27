@@ -8,8 +8,20 @@ object CheezeryContract {
         const val COLUMN_PRICE = "productPrice"
         const val COLUMN_IMAGE = "productImage"
         const val COLUMN_DESCRIPTION = "productDesc"
+        const val COLUMN_CATEGORY = "productCategory"
     }
 
+    object CombosEntry{
+        const val TABLE_NAME = "Combos"
+        const val COLUMN_ID = "comboId"
+        const val COLUMN_NAME = "comboName"
+        const val COLUMN_PRICE = "comboPrice"
+    }
 
-
+    object ProductsComboEntry{
+        const val TABLE_NAME = "ProductsCombo"
+        const val COLUMN_ID = "productComboId"
+        const val COLUMN_PRODUCT_ID = "productId"
+        const val COLUMN_COMBO_ID = "comboId"
+    }
 }
