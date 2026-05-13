@@ -5,9 +5,9 @@ import android.widget.Toast
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
-import lopez.ermesto.thecheesery.data.CombosDAO
+import lopez.ermesto.thecheesery.data.database.dao.CombosDAO
 import lopez.ermesto.thecheesery.data.DataBaseHelper
-import lopez.ermesto.thecheesery.data.ProductDAO
+import lopez.ermesto.thecheesery.data.database.dao.ProductDAO
 import lopez.ermesto.thecheesery.domain.Combo
 import lopez.ermesto.thecheesery.domain.Producto
 

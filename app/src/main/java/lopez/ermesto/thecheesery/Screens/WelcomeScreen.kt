@@ -27,12 +27,6 @@ fun WelcomeScreen(onNavigate: () -> Unit) {
                 .fillMaxWidth()
                 .weight(0.65f)
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.cheezery_logo),
-                contentDescription = null,
-                contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
-            )
         }
 
         Column(
