@@ -17,6 +17,7 @@ val Less_Purple = Color(0xFFB2108D)
 val Pinky = Color(0xFFc50390)
 val Brighter_Pink = Color(0xFFef029d)
 val DisabledGrey = Color(0xFF8F8B96)
+val DarkGrey = Color(0xFF333333)
 
 val firstGradient = Brush.verticalGradient(
     listOf(Brighter_Pink, Pinky)

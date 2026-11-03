@@ -18,7 +18,9 @@ import lopez.ermesto.thecheesery.R
 import lopez.ermesto.thecheesery.ui.theme.*
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(
+    onGetStarted: () -> Unit = {}
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -65,7 +67,7 @@ fun WelcomeScreen() {
             Spacer(modifier = Modifier.height(20.dp))
 
             Button(
-                onClick = { },
+                onClick = onGetStarted,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Brighter_Pink
                 ),

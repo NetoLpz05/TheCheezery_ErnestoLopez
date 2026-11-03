@@ -2,6 +2,7 @@ package lopez.ermesto.thecheesery.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -16,19 +17,10 @@ import lopez.ermesto.thecheesery.R
 import lopez.ermesto.thecheesery.ui.theme.*
 
 @Composable
-fun MenuScreen(onNavigate: (String) -> Unit) {
-
-    Row(modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-        Button(onClick = {},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Less_Purple
-            )) {
-            Image(painter = painterResource(id = R.drawable.cart),
-                contentDescription = null,
-                modifier = Modifier.fillMaxWidth())
-        }
-    }
-
+fun MenuScreen(
+    onNavigateToCategory: (String) -> Unit = {},
+    onNavigateToCart: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -36,10 +28,31 @@ fun MenuScreen(onNavigate: (String) -> Unit) {
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = onNavigateToCart,
+                modifier = Modifier
+                    .size(50.dp)
+                    .background(Less_Purple, CircleShape)
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.cart),
+                    contentDescription = "Carrito de compras",
+                    tint = Color.White,
+                    modifier = Modifier.size(28.dp)
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.height(10.dp))
 
         Image(
             painter = painterResource(id = R.drawable.grupo2),
-            contentDescription = null,
+            contentDescription = "The Cheezery Logo",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(140.dp)
@@ -51,24 +64,23 @@ fun MenuScreen(onNavigate: (String) -> Unit) {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                MenuButton("Hot drinks", firstGradient) { onNavigate("hot") }
-                MenuButton("Cold drinks", firstGradient) { onNavigate("cold") }
+                MenuButton("Hot drinks", firstGradient) { onNavigateToCategory("hot") }
+                MenuButton("Cold drinks", firstGradient) { onNavigateToCategory("cold") }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                MenuButton("Salties", secondGradient) { onNavigate("salties") }
-                MenuButton("Sweets", secondGradient) { onNavigate("sweets") }
+                MenuButton("Salties", secondGradient) { onNavigateToCategory("salties") }
+                MenuButton("Sweets", secondGradient) { onNavigateToCategory("sweets") }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                MenuButton("Combos", thirdGradient) { onNavigate("combos") }
-                MenuButton("Add new product", thirdGradient) { onNavigate("add") }
+                MenuButton("Combos", thirdGradient) { onNavigateToCategory("combos") }
+                MenuButton("Add new product", thirdGradient) { onNavigateToCategory("add") }
             }
         }
     }
@@ -76,7 +88,6 @@ fun MenuScreen(onNavigate: (String) -> Unit) {
 
 @Composable
 fun MenuButton(text: String, gradient: Brush, onClick: () -> Unit) {
-
     Box(
         modifier = Modifier
             .width(150.dp)
@@ -98,5 +109,5 @@ fun MenuButton(text: String, gradient: Brush, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun MenuPreview() {
-    MenuScreen(onNavigate = {})
+    MenuScreen()
 }
