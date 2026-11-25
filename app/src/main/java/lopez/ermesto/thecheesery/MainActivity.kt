@@ -13,13 +13,16 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import lopez.ermesto.thecheesery.screens.AddProductScreen
 import lopez.ermesto.thecheesery.screens.CartScreen
+import lopez.ermesto.thecheesery.screens.ComboScreen
 import lopez.ermesto.thecheesery.screens.LoginScreen
 import lopez.ermesto.thecheesery.screens.MenuScreen
 import lopez.ermesto.thecheesery.screens.ProductScreen
 import lopez.ermesto.thecheesery.screens.WelcomeScreen
 import lopez.ermesto.thecheesery.ui.theme.TheCheezeryTheme
 import lopez.ermesto.thecheesery.viewmodel.CartViewModel
+import lopez.ermesto.thecheesery.viewmodel.CheezeryViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,7 @@ class MainActivity : ComponentActivity() {
 fun TheCheezeryApp() {
     val navController = rememberNavController()
     val cartViewModel: CartViewModel = viewModel()
+    val cheezeryViewModel: CheezeryViewModel = viewModel()
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         NavHost(
@@ -63,7 +67,13 @@ fun TheCheezeryApp() {
             composable("menu") {
                 MenuScreen(
                     onNavigateToCategory = { category ->
-                        navController.navigate("product/$category")
+                        if (category == "combos") {
+                            navController.navigate("combos")
+                        } else if (category == "add") {
+                            navController.navigate("add")
+                        } else {
+                            navController.navigate("product/$category")
+                        }
                     },
                     onNavigateToCart = {
                         navController.navigate("cart")
@@ -77,6 +87,20 @@ fun TheCheezeryApp() {
                     viewModel = cartViewModel,
                     onBack = { navController.popBackStack() },
                     onNavigateToCart = { navController.navigate("cart") }
+                )
+            }
+            composable("combos") {
+                ComboScreen(
+                    cheezeryViewModel = cheezeryViewModel,
+                    cartViewModel = cartViewModel,
+                    onBack = { navController.popBackStack() },
+                    onNavigateToCart = { navController.navigate("cart") }
+                )
+            }
+            composable("add") {
+                AddProductScreen(
+                    cheezeryViewModel = cheezeryViewModel,
+                    onBack = { navController.popBackStack() }
                 )
             }
             composable("cart") {
